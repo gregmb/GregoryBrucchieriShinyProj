@@ -59,11 +59,12 @@ ui <- dashboardPage(
 server <- function(input, output) {
   
   
-  
+  #build data frame for map
   borocoll_db <- reactive(collision%>%filter(borough==input$borslct,
                                              date<=paste(input$Y,input$m,'31', sep = '-'),
                                              date>=paste(input$Y,input$m,'01', sep = '-')))
   
+  #build data frame for time analysis plots
   timecoll_db <- reactive(if (input$timrad == 1){
                               collision%>%filter(borough==input$borslct)
                           }else if (input$timrad == 2){
@@ -74,31 +75,18 @@ server <- function(input, output) {
   
                           })
   
+  #build data frame for casualty plots
   cascoll_db <- reactive(collision%>%filter(borough==input$borslct))
   
-  vlat<-reactive(switch(input$borslct, 'BRONX' = 40.826,
-                  'BROOKLYN' = 40.69245,
-                  'MANHATTAN' = 40.714623,
-                  'QUEENS' = 40.714,
-                  'STATEN ISLAND' = 40.58071,
-                  40.714623))
-  vlng<-reactive(switch(input$borslct, 'BRONX' = -73.92309,
-                  'BROOKLYN' = -73.99036,
-                  'MANHATTAN' = -74.006605,
-                  'QUEENS' = -73.82999,
-                  'STATEN ISLAND' = -74.15269,
-                  -74.006605))
-  
-                         
-  
 
+  #build map
   output$map <- renderLeaflet({
     borocoll_db()%>%
       leaflet()%>%addProviderTiles('Esri.WorldStreetMap')%>%
-      setView(lng = -74.005505, lat = 40.784623, zoom = 13)%>%
-     addMarkers(lng = ~longitude, lat = ~latitude)
+      addMarkers(lng = ~longitude, lat = ~latitude)
   })
   
+  #build plots for time analysis page
   output$time <- renderPlot({
     timecoll_db()%>% group_by(date)%>%
       summarise(totalCollisions=n())%>% mutate(year=substr(date, 1, 4),
@@ -108,6 +96,7 @@ server <- function(input, output) {
     
   })
   
+  #build injury plot
   output$injury <- renderPlot({ 
     cascoll_db()%>%group_by(date)%>%
       mutate(month=substr(date, 6, 7), year=substr(date, 1, 4))%>%group_by(year, month)%>%
@@ -115,6 +104,7 @@ server <- function(input, output) {
       ggplot(aes(x=month, y=totalInjured, group=year, color=year))+geom_line(size=3)+ggtitle('Total Injuries per Month')
   })
   
+  #build death plot
   output$death <- renderPlot({
     cascoll_db()%>%group_by(date)%>%
       mutate(month=substr(date, 6, 7), year=substr(date, 1, 4))%>%group_by(year, month)%>%
