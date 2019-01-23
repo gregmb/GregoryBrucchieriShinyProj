@@ -1,4 +1,5 @@
 # GregoryBrucchieriShinyProj
+<<<<<<< HEAD
 https://gregmb.shinyapps.io/GregoryBrucchieriProj1/
 
 
@@ -12,3 +13,9 @@ I have a map also in the code to show the locations of collisions within the tim
 
 The app is accessible through the link at the top of this readme file.
 
+=======
+Shiny Proj
+These are the app and csv for my Shiny project.
+
+https://gregmb.shinyapps.io/GregoryBrucchieriProj1/
+>>>>>>> 7570ea546efd8624a84535bb3cdf4bf98a507ee0
