@@ -1,7 +1,6 @@
 # GregoryBrucchieriShinyProj
-<<<<<<< HEAD
-https://gregmb.shinyapps.io/GregoryBrucchieriProj1/
 
+https://gregmb.shinyapps.io/GregoryBrucchieriProj1/
 
 This app looks at data from the NYPD Traffic Violations data set available on NYC Open Data (https://opendata.cityofnewyork.us). The app analyzes data from July 2012 through July 2018.
 
@@ -13,9 +12,3 @@ I have a map also in the code to show the locations of collisions within the tim
 
 The app is accessible through the link at the top of this readme file.
 
-=======
-Shiny Proj
-These are the app and csv for my Shiny project.
-
-https://gregmb.shinyapps.io/GregoryBrucchieriProj1/
->>>>>>> 7570ea546efd8624a84535bb3cdf4bf98a507ee0
