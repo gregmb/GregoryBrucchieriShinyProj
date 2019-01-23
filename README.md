@@ -1,4 +1,4 @@
-# GregoryBrucchieriShinyProj
+# TrafficCollisionApp
 
 https://gregmb.shinyapps.io/GregoryBrucchieriProj1/
 
